@@ -8,7 +8,7 @@
 With node previously installed:
 
 ```bash
-$ npm install -g fsplates
+$ npm install -g jkroso/fs-plates
 ```
 
 With node binary on OSX:
@@ -17,8 +17,8 @@ With node binary on OSX:
 $ (cd /usr/local && \
    curl -L# http://nodejs.org/dist/v0.8.22/node-v0.8.22-darwin-x86.tar.gz \
    | tar -zx --strip 1) \
-  && npm install -g fsplates \
-  && printf "installed fsplates(1) %s\n" $(fsplates --version)
+  && npm install -g jkroso/fs-plates \
+  && printf "installed fsplates(1) %s\n" $(fsplate --version)
 ```
 
 NOTE: tested with node 0.8.x
