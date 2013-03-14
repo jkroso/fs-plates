@@ -1,0 +1,14 @@
+{
+  "name": "{{project_name}}",
+  "version": "0.0.1",
+  "description": "{{project_description}}",
+  "keywords": [],
+  "author": "{{first_name}} {{last_name}}<{{email}}>",
+  "repository": { "type": "git", "url": "git://github.com/{{username}}/{{project_name}}.git" },
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
+  "main": "index"
+}

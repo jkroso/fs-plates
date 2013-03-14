@@ -1,0 +1,25 @@
+{
+  "name": "{{project_name}}",
+  "version": "0.1.0",
+  "description": "{{project_description}}",
+  "keywords": [{{keywords}}],
+  "dependencies": {
+    
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*"
+  },
+  "scripts" : {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/{{username}}/{{project_name}}.git"
+  },
+  "bugs": {
+    "url": "https://github.com/{{username}}/{{project_name}}/issues"
+  },
+  "author": "{{first_name}} {{last_name}}",
+  "license": "MIT"
+}

@@ -1,0 +1,37 @@
+{
+  "name": "fsplates",
+  "version": "0.1.0",
+  "description": "Generate files and directories from templates",
+  "preferGlobal": true,
+  "dependencies": {
+    "commander": "1.1.1",
+    "recursive-readdir": "0.0.1",
+    "async-forEach": "git://github.com/jkroso/async-forEach",
+    "mkdirp": "0.3.5"
+  },
+  "bin": {
+    "fsplate": "bin/fsplates"
+  },
+  "scripts": {
+    "install": "bin/install.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jkroso/fs-plates.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jkroso/fs-plates/issues"
+  },
+  "keywords": [
+    "templates",
+    "project",
+    "generate",
+    "scaffolding",
+    "init"
+  ],
+  "bundledDependencies": [
+    "async-forEach"
+  ],
+  "author": "Jakeb Rosoman",
+  "license": "MIT"
+}

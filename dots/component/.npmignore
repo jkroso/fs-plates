@@ -1,0 +1,8 @@
+/.gitignore
+/.npmignore
+/node_modules
+/components
+/build
+/test
+/Makefile
+/component.json
