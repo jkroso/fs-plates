@@ -11,8 +11,8 @@ var program = require('commander')
 program.version(require('../package').version)
 	.usage('template [target directory]')
 	.option('-r, --rename', 'prompt for name before writing files')
-	.option('-s, --source [path]', 'where to look for templates [$HOME/.fsplates]', process.env.HOME + '/.fsplates')
-	.option('-c, --config [path]', 'data [$HOME/.fsplates/.config.json]', process.env.HOME + '/.fsplates/.config.json')
+	.option('-s, --source [path]', 'where to look for templates [~/.fsplates]', process.env.HOME + '/.fsplates')
+	.option('-c, --config [path]', 'data [~/.fsplates/.config.json]', process.env.HOME + '/.fsplates/.config.json')
 
 program.on('--help', function () {
 	console.log('')
