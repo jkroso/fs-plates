@@ -1,15 +1,18 @@
-all: build
+GRAPH=node_modules/.bin/sourcegraph.js -p nodeish,mocha
+COMPILE=node_modules/.bin/bigfile.js -p nodeish
+REPORTER=dot
 
-install: components
-	npm install
+all: test/built.js
 
-components:
-	component install -vd
-
-build:
-	component build -vd
+test:
+	@node_modules/.bin/mocha test/*.test.js \
+		--reporter $(REPORTER) \
+		--bail
 
 clean:
-	@rm -rf components
+	@rm -f test/built.js
 
-.PHONY: all clean
+test/built.js: index.js test/*
+	@$(GRAPH) test/browser.js | $(COMPILE) -x null > $@
+
+.PHONY: all test clean

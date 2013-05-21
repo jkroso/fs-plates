@@ -1,8 +1,8 @@
 REPORTER=spec
 
 test:
-	@node_modules/.bin/mocha \
-		--require should \
+	@node_modules/mocha/bin/_mocha \
+		--bail \
 		--reporter $(REPORTER)
 
 .PHONY: test

@@ -3,6 +3,11 @@
 /node_modules
 /components
 /build
+/License
 /test
 /Makefile
+/examples
+/dist
 /component.json
+*.sublime-project
+*.sublime-workspace
