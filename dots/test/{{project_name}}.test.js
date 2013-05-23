@@ -1,5 +1,5 @@
 
-var should = require('chai').should()
+var chai = require('./chai')
   , {{project_name}} = require('..')
 
 describe('{{project_name}}', function () {
