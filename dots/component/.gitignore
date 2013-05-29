@@ -1,6 +1,0 @@
-/build
-/dist
-/components
-/node_modules
-/test/built.js
-{{project_name}}.js
