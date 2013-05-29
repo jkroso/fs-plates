@@ -30,7 +30,3 @@ $ make
 Then open your browser to the `./test` directory.
 
 _Note: these commands don't work on windows._ 
-
-## License 
-
-[MIT](License)

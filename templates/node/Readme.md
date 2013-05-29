@@ -29,7 +29,3 @@ $ make test
 ```
 
 _Note: these commands don't work on windows._ 
-
-## License 
-
-[MIT](License)
