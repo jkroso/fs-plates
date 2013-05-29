@@ -7,10 +7,9 @@
   "dependencies": {
 
   },
-  "main": "src/index.js",
   "scripts": [
-	  "src/index.js"
+	  "index.js"
   ],
-  "styles":[{{style_scripts}}],
+  "styles":[],
   "license": "MIT"
 }

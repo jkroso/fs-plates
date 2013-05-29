@@ -2,17 +2,12 @@
   "name": "{{project_name}}",
   "version": "0.1.0",
   "description": "{{project_description}}",
-  "dependencies": {
-    
-  },
+  "dependencies": {},
   "devDependencies": {
     "mocha": "*",
     "chai": "*",
     "bigfile": "*",
     "sourcegraph": "*"
-  },
-  "scripts" : {
-    "test": "make test"
   },
   "repository": {
     "type": "git",

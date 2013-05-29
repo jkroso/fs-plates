@@ -1,4 +1,4 @@
-GRAPH=node_modules/.bin/sourcegraph.js -p nodeish,mocha
+GRAPH=node_modules/.bin/sourcegraph -p nodeish,mocha
 COMPILE=node_modules/.bin/_bigfile -p nodeish
 REPORTER=dot
 
@@ -14,5 +14,8 @@ clean:
 
 test/built.js: index.js test/*
 	@$(GRAPH) test/browser.js | $(COMPILE) -x null > $@
+
+{{project_name}}.js: index.js
+	@$(GRAPH) $< | $(COMPILE) -x {{project_name}} > $@
 
 .PHONY: all test clean

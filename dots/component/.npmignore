@@ -8,6 +8,7 @@
 /Makefile
 /examples
 /dist
+/bench
 /component.json
-*.sublime-project
-*.sublime-workspace
+*.sublime-*
+{{project_name}}.js

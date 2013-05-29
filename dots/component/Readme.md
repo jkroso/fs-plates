@@ -5,14 +5,9 @@
 
 ## Getting Started
 
-_With component_  
+_With [component](//github.com/component/component), [packin](//github.com/jkroso/packin) or [npm](//github.com/isaacs/npm)_  
 
-	$ component install {{username}}/{{project_name}}
-
-_With npm_  
-
-	$ npm install --save https://github.com/{{username}}/{{project_name}}/archive/master.tar.gz
-
+	$ {package mananger} install {{username}}/{{project_name}}
 
 then in your app:
 
