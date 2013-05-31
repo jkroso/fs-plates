@@ -24,9 +24,9 @@ var {{project_name}} = require('{{project_name}}')
 ## Running the tests
 
 ```bash
-$ npm install
-$ make
+$ make serve
 ```
+
 Then open your browser to the `./test` directory.
 
-_Note: these commands don't work on windows._ 
+_Note: this command won't work on windows._ 

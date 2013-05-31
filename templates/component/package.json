@@ -2,12 +2,11 @@
   "name": "{{project_name}}",
   "version": "0.1.0",
   "description": "{{project_description}}",
-  "dependencies": {},
+  "dependencies": {
+    "serve": "http://github.com/jkroso/serve/tarball/1.2.1"
+  },
   "devDependencies": {
-    "mocha": "*",
-    "chai": "*",
-    "bigfile": "*",
-    "sourcegraph": "*"
+    "mocha": "*"
   },
   "repository": {
     "type": "git",

@@ -1,21 +1,20 @@
-GRAPH=node_modules/.bin/sourcegraph -p nodeish,mocha
-COMPILE=node_modules/.bin/_bigfile -p nodeish
 REPORTER=dot
-
-all: test/built.js
 
 test:
 	@node_modules/.bin/mocha test/*.test.js \
 		--reporter $(REPORTER) \
 		--bail
 
+serve: node_modules/.bin
+	@node_modules/.bin/serve
+
+node_modules: deps.json
+	@packin install
+
+node_modules/.bin: package.json node_modules
+	@npm install mocha serve
+
 clean:
-	@rm -f test/built.js
+	rm -r node_modules
 
-test/built.js: index.js test/*
-	@$(GRAPH) test/browser.js | $(COMPILE) -x null > $@
-
-{{project_name}}.js: index.js
-	@$(GRAPH) $< | $(COMPILE) -x {{project_name}} > $@
-
-.PHONY: all test clean
+.PHONY: clean serve test
