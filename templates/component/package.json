@@ -3,9 +3,7 @@
   "version": "0.1.0",
   "description": "{{project_description}}",
   "dependencies": {
-    "serve": "http://github.com/jkroso/serve/tarball/1.2.1"
-  },
-  "devDependencies": {
+    "serve": "http://github.com/jkroso/serve/tarball/1.2.2",
     "mocha": "*"
   },
   "repository": {

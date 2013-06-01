@@ -7,8 +7,6 @@
 /test
 /Makefile
 /examples
-/dist
 /bench
 /component.json
 *.sublime-*
-{{project_name}}.js

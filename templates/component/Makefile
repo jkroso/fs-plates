@@ -1,12 +1,12 @@
 REPORTER=dot
 
+serve: node_modules/.bin
+	@node_modules/.bin/serve
+
 test:
 	@node_modules/.bin/mocha test/*.test.js \
 		--reporter $(REPORTER) \
 		--bail
-
-serve: node_modules/.bin
-	@node_modules/.bin/serve
 
 node_modules: deps.json
 	@packin install

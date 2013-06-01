@@ -23,10 +23,4 @@ var {{project_name}} = require('{{project_name}}')
 
 ## Running the tests
 
-```bash
-$ make serve
-```
-
-Then open your browser to the `./test` directory.
-
-_Note: this command won't work on windows._ 
+Just run `make`. It will install and start a development server so all you then need to do is point your browser to `localhost:3000/test`. Likewise to run the examples.
