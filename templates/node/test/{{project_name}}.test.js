@@ -1,0 +1,1 @@
+../../test/{{project_name}}.test.js
