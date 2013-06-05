@@ -1,18 +1,19 @@
 REPORTER=dot
 
-serve: node_modules/.bin
-	@node_modules/.bin/serve
+serve: node_modules
+	@node_modules/serve/bin/serve
 
 test:
-	@node_modules/.bin/mocha test/*.test.js \
+	@node_modules/mocha/bin/_mocha test/*.test.js \
 		--reporter $(REPORTER) \
+		--timeout 500 \
 		--bail
 
-node_modules: deps.json
-	@packin install
-
-node_modules/.bin: package.json node_modules
-	@npm install mocha serve
+node_modules: component.json
+	@packin install --meta component.json,package.json \
+		--folder node_modules \
+		--executables \
+		--no-retrace
 
 clean:
 	rm -r node_modules
