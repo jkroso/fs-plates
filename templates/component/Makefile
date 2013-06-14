@@ -3,7 +3,7 @@ REPORTER=dot
 serve: node_modules
 	@node_modules/serve/bin/serve
 
-test:
+test: node_modules
 	@node_modules/mocha/bin/_mocha test/*.test.js \
 		--reporter $(REPORTER) \
 		--timeout 500 \
