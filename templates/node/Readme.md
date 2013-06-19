@@ -3,9 +3,7 @@
 
   {{project_description}}
 
-## Getting Started
-
-_With npm_  
+## Installation
 
 	$ npm install {{project_name}} --save
 
@@ -27,5 +25,3 @@ var {{project_name}} = require('{{project_name}}')
 $ npm install
 $ make test
 ```
-
-_Note: these commands don't work on windows._ 
