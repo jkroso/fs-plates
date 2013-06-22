@@ -23,4 +23,4 @@ var {{project_name}} = require('{{project_name}}')
 
 ## Running the tests
 
-Just run `make`. It will install and start a development server so all you then need to do is point your browser to `localhost:3000/test`. Likewise to run the examples.
+Just run `make`. It will install and start a development server leaving the tests waiting for you [at](http://localhost:3000/test)
