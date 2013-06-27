@@ -1,19 +1,22 @@
 {
   "name": "fsplates",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Generate files and directories from templates",
   "preferGlobal": true,
   "dependencies": {
-    "commander": "1.1.1",
-    "recursive-readdir": "0.0.1",
-    "async-forEach": "git://github.com/jkroso/async-forEach",
-    "mkdirp": "0.3.5"
+    "when": "http://github.com/jkroso/when/tarball/3.2.4",
+    "map": "http://github.com/jkroso/map/tarball/0.2.5",
+    "commander": "1.2.0",
+    "writefile": "0.2.2",
+    "resultify": "0.2.4",
+    "dir-each": "0.3.3",
+    "result": "0.3.1"
   },
   "bin": {
     "fsplate": "bin/fsplates"
   },
   "scripts": {
-    "install": "bin/install.sh"
+    "install": "bin/install.sh && npm dedupe"
   },
   "repository": {
     "type": "git",
@@ -28,9 +31,6 @@
     "generate",
     "scaffolding",
     "init"
-  ],
-  "bundledDependencies": [
-    "async-forEach"
   ],
   "author": "Jakeb Rosoman",
   "license": "MIT"

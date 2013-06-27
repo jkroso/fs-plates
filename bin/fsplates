@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 
 var program = require('commander')
+  , eachFile = require('dir-each/series').withSyms
+  , decorate = require('when/decorate')
+  , writeFile = require('writefile')
+  , fs = require('resultify/fs')
+  , map = require('map/series')
+  , Result = require('result')
   , path = require('path')
-  , readDir = require('recursive-readdir')
-  , fs = require('fs')
-  , each = require('async-forEach')
-  , series = each.series
-  , mkdir = require('mkdirp')
 
 program.version(require('../package').version)
 	.usage('template [target directory]')
@@ -26,7 +27,7 @@ program.on('--help', function () {
 	console.log('')
 	console.log('    # rename')
 	console.log('    $ fsplate -r Readme.md')
-	console.log('    Readme.md is available. prefered name: $')
+	console.log('    Readme.md is available. Do you have a prefered name: $')
 	console.log('')
 	console.log('    # target a sub-directory')
 	console.log('    $ fsplate component my-component')
@@ -40,148 +41,146 @@ var template = program.args[0]
 if (!template) {
 	console.warn('template required')
 	program.help()
-	process.exit()
+	process.exit(1)
 }
+
+// directory to write to
 
 var destination = program.args[1] 
 	? path.resolve(program.args[1])
 	: process.cwd()
 
 program.source = path.resolve(program.source)
-
 template = path.join(program.source, template)
-
-var isDir = fs.statSync(template).isDirectory()
 var cache = require(program.config)
+var baseDir = template
 
-if (isDir) {
-	readDir(template, function(err, files){
-		if (err) throw err
-		main(files)
-	})
-} else {
-	main([template])
-}
+var concat = decorate(function(a, b){
+	return a.concat(b)
+})
 
-function main(names){
-	var files = readFiles(names)
-	var vars = extractVars(files)
-
-	// prompt for input
-	series(vars, function(v, done){
-		if (v in cache) return done()
-		program.prompt(v+': ', function(value){
-			cache[v] = value
-			done()
-		})
-	}, function(){
-		writeFiles(interpolate(files))
-	})
-}
-
-/**
- * map paths to file content
- */
-
-function readFiles(names){
-	var files = {}
-	var dir = isDir ? template : path.dirname(template)
-	names.forEach(function(name){
-		var txt = fs.readFileSync(name, 'utf-8')
-		files[path.relative(dir, name)] = txt
-	})
-	return files
-}
-
-/**
- * write file map to fs destination
- */
-
-function writeFiles(files){
-	series(Object.keys(files), function(name, next){
-		var txt = files[name]
-		name = path.join(destination, name)
-
-		if (program.rename) {
-			var msg = path.basename(name)
-			if (fs.existsSync(name)) {
-				msg += ' is an existing '
-				msg += fs.statSync(name).isDirectory()
-					? 'directory'
-					: 'file'
-			} else {
-				msg += ' is available'
-			}
-			msg += '. prefered name: '
-			program.prompt(msg, function(res){
-				if (res) name = path.join(path.dirname(name), res)
-				writeDir(name)
-			})
-		} else {
-			writeDir(name)
-		}
-		
-		function writeDir(name){
-			mkdir(path.dirname(name), function(err){
-				if (err) throw err
-
-				if (fs.existsSync(name)) {
-					var shortname = path.relative(process.cwd(), name)
-					program.confirm('overwrite '+shortname+'? ', writeFile)
-				} else {
-					writeFile(true)
-				}
-			})
-		}
-
-		function writeFile(ok){
-			if (!ok) next()
-			else fs.writeFile(name, txt, 'utf-8', next)
-		}
-	}, process.exit)
-}
+var toObject = decorate(function(keys){
+	var obj = {}
+	for (var i = 0, len = keys.length; i < len; i++) {
+		obj[keys[i]] = null
+	}
+	return obj
+})
 
 /**
  * determine required variables
+ *
+ * @param {String} txt
+ * @return {Array}
  */
 
-function extractVars(files) {
+var vars = decorate(function(txt){
 	var vars = []
-	for (var path in files) {
-		var rgx = /\{{2}([^}]*)\}{2}/g
-		var txt = files[path] + path
-		while (rgx.exec(txt)) {
-			if (vars.indexOf(RegExp.$1) < 0) {
-				vars.push(RegExp.$1)
-			}
+	var reg = /\{{2}([^}]*)\}{2}/g
+	var m
+	while (m = reg.exec(txt)) {
+		if (vars.indexOf(m[1]) == -1) {
+			vars.push(m[1])
 		}
 	}
 	return vars
-}
-
-/**
- * transform files
- */
-
-function interpolate(files){
-	var res = {}
-
-	for (var path in files) {
-		res[replaceAll(path)] = replaceAll(files[path])
-	}
-
-	return res
-}
+})
 
 /**
  * replace vars with values in `txt`
  */
 
-function replaceAll(txt){
+var interpolate = decorate(function(txt, dict){
 	while ((/\{{2}([^}]*)\}{2}/g).exec(txt)) {
-		txt = RegExp.leftContext + 
-			cache[RegExp.$1] + 
-			RegExp.rightContext		
+		txt = RegExp.leftContext
+			+ dict[RegExp.$1]
+			+ RegExp.rightContext
 	}
 	return txt
+})
+
+/**
+ * render a file template
+ * 
+ * @param {String} source path
+ * @return {Result}
+ */
+
+function render(source){
+	var name = path.relative(baseDir, source)
+	var txt = fs.readFile(source, 'utf8')
+	var attrs = concat(vars(source), vars(txt))
+	var dict = map(toObject(attrs), function(_, attr){
+		if (attr in cache) return cache[attr]
+		return cache[attr] = prompt(attr)
+	})
+	return writeSafely(
+		interpolate(name, dict),
+		interpolate(txt, dict))
+}
+
+/**
+ * write the file to its destination with
+ * safety check
+ * 
+ * @param {String} name
+ * @param {String} txt
+ * @return {Result}
+ */
+
+var writeSafely = decorate(function(name, txt){
+	name = path.join(destination, name)
+
+	if (program.rename) {
+		var msg = path.basename(name)
+			+ (fs.existsSync(name)
+					? ' exists'
+					: ' is available')
+			+ '. Do you have a prefered name'
+		return prompt(msg).then(function(res){
+			if (res) name = path.join(path.dirname(name), res)
+			return writeFile(name, txt)
+		})
+	}
+	if (!fs.existsSync(name)) return writeFile(name, txt)
+	var shortname = path.relative(process.cwd(), name)
+	return confirm('overwrite ' + shortname).then(function(ok){
+		if (ok) return writeFile(name, txt)
+	})
+})
+
+/**
+ * ask the user for input
+ * 
+ * @param {String} what
+ * @return {Result}
+ */
+
+function prompt(what){
+	var result = new Result
+	program.prompt(what + ': ', function(value){
+		result.write(value)
+	})
+	return result
+}
+
+function confirm(what){
+	var result = new Result
+	program.confirm(what + '? ', function(yes){
+		result.write(yes)
+	})
+	return result	
+}
+
+// iterate through the templates
+
+if (fs.statSync(template).isDirectory()) {
+	eachFile(template, render).read(pause)
+} else {
+	var baseDir = path.dirname(baseDir)
+	render(template).read(pause)
+}
+
+function pause(){
+	process.stdin.pause()
 }
