@@ -5,9 +5,9 @@
 
 ## Installation
 
-_With [packin](//github.com/jkroso/packin), [component](//github.com/component/component), or [npm](//github.com/isaacs/npm)_
+_With [packin](//github.com/jkroso/packin) or [component](//github.com/component/component)_
 
-	$ {package mananger} install {{username}}/{{project_name}}
+	$ packin add {{username}}/{{project_name}}
 
 then in your app:
 
