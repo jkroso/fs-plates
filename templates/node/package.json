@@ -12,5 +12,6 @@
   "devDependencies": {
     "mocha": "*",
     "chai": "*"
-  }
+  },
+  "files": [ "index.js" ]
 }

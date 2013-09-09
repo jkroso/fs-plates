@@ -2,17 +2,14 @@
   "name": "{{project_name}}",
   "repo": "{{username}}/{{project_name}}",
   "description": "{{project_description}}",
-  "version": "0.1.0",
   "keywords": [{{keywords}}],
   "dependencies": {},
   "development": {
-    "visionmedia/mocha": "1.12.0",
-    "jkroso/serve": "1.5.0",
+    "visionmedia/mocha": "1.12.1",
+    "jkroso/serve": "1.5.1",
     "chaijs/chai-spies": "0.5.1",
     "chaijs/chai": "1.7.2"
   },
-  "scripts": [
-    "index.js"
-  ],
+  "scripts": ["index.js"],
   "license": "MIT"
 }
