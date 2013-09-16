@@ -1,6 +1,0 @@
-/.gitignore
-/.npmignore
-/node_modules
-/dots
-*.sublime-project
-*.sublime-workspace

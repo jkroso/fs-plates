@@ -33,5 +33,6 @@
     "init"
   ],
   "author": "Jakeb Rosoman",
-  "license": "MIT"
+  "license": "MIT",
+  "files": ["bin", "templates"]
 }
