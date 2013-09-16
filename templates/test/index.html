@@ -10,8 +10,13 @@
 	<div id="mocha"></div>
 	<script>
 		var mocha = require('mocha')
-		mocha.setup('bdd')
-		mocha.timeout(200)
+
+		mocha.setup({
+			reporter: 'html',
+			timeout: 200,
+			bail: true,
+			ui: 'bdd'
+		})
 
 		require('./{{project_name}}.test')
 

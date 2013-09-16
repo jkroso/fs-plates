@@ -7,7 +7,7 @@
 
 _With [packin](//github.com/jkroso/packin) or [component](//github.com/component/component)_
 
-	$ packin add {{username}}/{{project_name}}
+    $ packin add {{username}}/{{project_name}}
 
 then in your app:
 

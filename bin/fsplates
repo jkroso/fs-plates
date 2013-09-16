@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
+var eachFile = require('dir-each/series').withSyms
+var writeFile = require('writefile')
 var program = require('commander')
-  , eachFile = require('dir-each/series').withSyms
-  , decorate = require('when/decorate')
-  , writeFile = require('writefile')
-  , fs = require('resultify/fs')
-  , map = require('map/series')
-  , Result = require('result')
-  , path = require('path')
+var fs = require('lift-result/fs')
+var lift = require('lift-result')
+var map = require('map/series')
+var Result = require('result')
+var path = require('path')
 
 program.version(require('../package').version)
 	.usage('template [target directory]')
@@ -55,11 +55,11 @@ template = path.join(program.source, template)
 var cache = require(program.config)
 var baseDir = template
 
-var concat = decorate(function(a, b){
+var concat = lift(function(a, b){
 	return a.concat(b)
 })
 
-var toObject = decorate(function(keys){
+var toObject = lift(function(keys){
 	var obj = {}
 	for (var i = 0, len = keys.length; i < len; i++) {
 		obj[keys[i]] = null
@@ -74,7 +74,7 @@ var toObject = decorate(function(keys){
  * @return {Array}
  */
 
-var vars = decorate(function(txt){
+var vars = lift(function(txt){
 	var vars = []
 	var reg = /\{{2}([^}]*)\}{2}/g
 	var m
@@ -90,7 +90,7 @@ var vars = decorate(function(txt){
  * replace vars with values in `txt`
  */
 
-var interpolate = decorate(function(txt, dict){
+var interpolate = lift(function(txt, dict){
 	while ((/\{{2}([^}]*)\}{2}/g).exec(txt)) {
 		txt = RegExp.leftContext
 			+ dict[RegExp.$1]
@@ -128,7 +128,7 @@ function render(source){
  * @return {Result}
  */
 
-var writeSafely = decorate(function(name, txt){
+var writeSafely = lift(function(name, txt){
 	name = path.join(destination, name)
 
 	if (program.rename) {
