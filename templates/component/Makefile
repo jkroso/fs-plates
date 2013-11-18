@@ -10,11 +10,9 @@ test: node_modules
 		--check-leaks \
 		--bail
 
-node_modules: component.json package.json
-	@packin install \
-		--meta package.json,component.json,deps.json \
-		--folder node_modules \
-		--executables \
-		--no-retrace
+node_modules: *.json
+	@packin install -Re\
+		--meta deps.json,package.json,component.json \
+		--folder node_modules
 
 .PHONY: serve test

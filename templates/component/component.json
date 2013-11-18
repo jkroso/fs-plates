@@ -5,10 +5,10 @@
   "keywords": [{{keywords}}],
   "dependencies": {},
   "development": {
-    "visionmedia/mocha": "1.12.1",
-    "jkroso/serve": "1.5.1",
-    "chaijs/chai-spies": "0.5.1",
-    "chaijs/chai": "1.7.2"
+    "visionmedia/mocha": "*",
+    "chaijs/chai-spies": "*",
+    "jkroso/serve": "*",
+    "chaijs/chai": "*"
   },
   "scripts": ["index.js"],
   "license": "MIT"
