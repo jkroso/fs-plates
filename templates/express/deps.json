@@ -1,0 +1,7 @@
+{
+  "development": {},
+  "production": {
+    "express": "http://registry.npmjs.org/express/-/express-3.4.4.tgz",
+    "jade": "http://registry.npmjs.org/jade/-/jade-0.35.0.tgz"
+  }
+}
