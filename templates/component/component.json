@@ -4,12 +4,6 @@
   "description": "{{project_description}}",
   "keywords": [{{keywords}}],
   "dependencies": {},
-  "development": {
-    "visionmedia/mocha": "*",
-    "chaijs/chai-spies": "*",
-    "jkroso/serve": "*",
-    "chaijs/chai": "*"
-  },
   "scripts": ["index.js"],
   "license": "MIT"
 }

@@ -4,6 +4,12 @@
   "description": "{{project_description}}",
   "keywords": [{{keywords}}],
   "dependencies": {},
+  "devDependencies": {
+    "serve": "jkroso/serve#1.5.1",
+    "chai-spies": "*",
+    "mocha": "*",
+    "chai": "*"
+  },
   "repository": "git://github.com/{{username}}/{{project_name}}.git",
   "bugs": "https://github.com/{{username}}/{{project_name}}/issues",
   "author": "{{first_name}} {{last_name}}",
