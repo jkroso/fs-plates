@@ -1,16 +1,16 @@
 {
   "name": "fsplates",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Generate files and directories from templates",
   "preferGlobal": true,
   "dependencies": {
-    "map": "jkroso/map#0.2.8",
-    "lift-result": "0.1.1",
+    "map": "jkroso/map#0.2.9",
+    "lift-result": "~0.1.3",
     "result-type": "1.0.0",
     "commander": "1.3.2",
-    "writefile": "0.2.4",
-    "dir-each": "0.3.5",
-    "result": "0.4.3"
+    "writefile": "~0.2.5",
+    "dir-each": "~0.3.6",
+    "result": "~0.4.4"
   },
   "bin": {
     "fsplate": "bin/fsplates"
@@ -20,13 +20,7 @@
   },
   "repository": "git://github.com/jkroso/fs-plates.git",
   "bugs": "https://github.com/jkroso/fs-plates/issues",
-  "keywords": [
-    "templates",
-    "project",
-    "generate",
-    "scaffolding",
-    "init"
-  ],
+  "keywords": ["templates", "project", "generate", "scaffolding", "init"],
   "author": "Jakeb Rosoman",
   "license": "MIT",
   "files": ["bin", "templates"]

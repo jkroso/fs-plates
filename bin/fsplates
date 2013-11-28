@@ -9,11 +9,14 @@ var map = require('map/series')
 var Result = require('result')
 var path = require('path')
 
+var home = process.env.HOME + '/.fsplates'
+
 program.version(require('../package').version)
-	.usage('template [target directory]')
-	.option('-r, --rename', 'prompt for name before writing files')
-	.option('-s, --source [path]', 'where to look for templates [~/.fsplates]', process.env.HOME + '/.fsplates')
-	.option('-c, --config [path]', 'data [~/.fsplates/.config.json]', process.env.HOME + '/.fsplates/.config.json')
+	.usage('<template> [target directory]')
+	.option('-r, --rename', 'prompt for file names')
+	.option('-f, --force', 'write over any existing files')
+	.option('-s, --source [path]', 'where to look for templates', home)
+	.option('-c, --config [path]', 'default data passed to templates', home + '/.config.json')
 
 program.on('--help', function () {
 	console.log('')
@@ -27,10 +30,10 @@ program.on('--help', function () {
 	console.log('')
 	console.log('    # rename')
 	console.log('    $ fsplate -r Readme.md')
-	console.log('    Readme.md is available. Do you have a prefered name: $')
+	console.log('    Readme.md exists. Enter your prefered name if you have one: $')
 	console.log('')
 	console.log('    # target a sub-directory')
-	console.log('    $ fsplate component my-component')
+	console.log('    $ fsplate component dir')
 	console.log('')
 })
 
@@ -114,9 +117,7 @@ function render(source){
 		if (attr in cache) return cache[attr]
 		return cache[attr] = prompt(attr)
 	})
-	return writeSafely(
-		interpolate(name, dict),
-		interpolate(txt, dict))
+	return writeSafely(interpolate(name, dict), interpolate(txt, dict))
 }
 
 /**
@@ -136,7 +137,7 @@ var writeSafely = lift(function(name, txt){
 			+ (fs.existsSync(name)
 					? ' exists'
 					: ' is available')
-			+ '. Do you have a prefered name'
+			+ '. Enter your prefered name if you have one'
 		return prompt(msg).then(function(res){
 			if (res) name = path.join(path.dirname(name), res)
 			return writeFile(name, txt)
@@ -144,9 +145,11 @@ var writeSafely = lift(function(name, txt){
 	}
 	if (!fs.existsSync(name)) return writeFile(name, txt)
 	var shortname = path.relative(process.cwd(), name)
-	return confirm('overwrite ' + shortname).then(function(ok){
-		if (ok) return writeFile(name, txt)
-	})
+	return program.force
+		? writeFile(name, txt)
+		: confirm('overwrite ' + shortname).then(function(ok){
+			return ok && writeFile(name, txt)
+		})
 })
 
 /**
