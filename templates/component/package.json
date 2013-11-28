@@ -5,9 +5,10 @@
   "keywords": [{{keywords}}],
   "dependencies": {},
   "devDependencies": {
-    "serve": "jkroso/serve#1.5.1",
+    "serve": "jkroso/serve",
     "chai-spies": "*",
     "mocha": "*",
+    "jsmd": "*",
     "chai": "*"
   },
   "repository": "git://github.com/{{username}}/{{project_name}}.git",

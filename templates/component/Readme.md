@@ -5,9 +5,11 @@
 
 ## Installation
 
-_With [packin](//github.com/jkroso/packin) or [component](//github.com/component/component)_
+With your favourite package manager:
 
-    $ packin add {{username}}/{{project_name}}
+- [packin](//github.com/jkroso/packin): `packin add {{username}}/{{project_name}}`
+- [component](//github.com/component/component#installing-packages): `component install {{username}}/{{project_name}}`
+- [npm](//npmjs.org/doc/cli/npm-install.html): `npm install {{project_name}}`
 
 then in your app:
 
@@ -21,4 +23,4 @@ var {{project_name}} = require('{{project_name}}')
 
 ## Running the tests
 
-Just run `make` and navigate your browser to the test directory.
+Just run `make` and navigate your browser to the test directory
