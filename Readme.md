@@ -3,65 +3,40 @@
 
   a cli tool for rendering project boilerplate
 
-## install
+## Installation
 
-With node previously installed:
+With [node](http://nodejs.org/download) installed:
 
-```bash
-$ npm install -g jkroso/fs-plates
+```sh
+$ npm install --global fs-plates
 ```
 
-With node binary on OSX:
+## Usage
 
-```bash
-$ (cd /usr/local && \
-   curl -L# http://nodejs.org/dist/v0.8.22/node-v0.8.22-darwin-x86.tar.gz \
-   | tar -zx --strip 1) \
-  && npm install -g jkroso/fs-plates \
-  && printf "installed fsplates(1) %s\n" $(fsplate --version)
+To create a new component project run:
+
+```sh
+fsplate component my_project
+cd myproject
 ```
 
-NOTE: tested with node 0.8.x
+This will create the directory `my_project` if it doesn't already exist and render the [component](//github.com/jkroso/fs-plates/tree/master/templates/component) template in it.
 
-## usage
+It can also render singular files which is handy for adding things like licenses to your projects:
 
-```
-Usage: fsplate template [target directory]
-
-Options:
-
-  -h, --help           output usage information
-  -V, --version        output the version number
-  -r, --rename         prompt for name before writing files
-  -s, --source [path]  where to look for templates [$HOME/.fsplates]
-  -c, --config [path]  data [$HOME/.fsplates/.config.json]
-
-
-Note: you will be prompted for any values not in `config`
-and no files will be overwritten without your confirmation
-
-Examples: 
-
-  # simple one file
-  $ fsplate Makefile
-
-  # rename
-  $ fsplate -r Readme.md
-  Readme.md is available. prefered name: $
-
-  # target a sub-directory
-  $ fsplate component my-component
+```sh
+fsplate License
 ```
 
-## template language
+## Templates
 
-templates are just normal files and directories. By default fsplates searches within `~/.fsplates` for a the template you call. It will then walk through each file in the template (if its a directory) and replace variables with values. variables are denoted by double mustaches `{{var here}}`. values are looked up within `~/.fsplates/.config.json`. Any values not found will be prompted for. The resulting Files are written to the working directory though you can specify a target. Don't worry about files being overwritten, fsplates, will prompt before doing anything dangerous. File paths can also contain mustaches so you can literally put them anywhere! Check out the `./dots` directory for example templates. 
+Templates are just normal files and directories. By default fsplates searches within `~/.fsplates` for a the template you call. It will then walk through each file in the template (if its a directory) and replace variables with values. variables are denoted by double mustaches `{{var here}}`. values are looked up within `~/.fsplates/.config.json`. Any values not found will be prompted for. The resulting Files are written to the working directory though you can specify a target. Don't worry about files being overwritten, fsplates, will prompt before doing anything dangerous. File paths can also contain mustaches. Check out the `./dots` directory for example templates.
 
 ## prior art
 
 - [visionmedia/ngen](https://github.com/visionmedia/ngen)
 - [bit101/STProjectMaker](https://github.com/bit101/STProjectMaker)
 
-## License 
+## License
 
 [MIT](License)
