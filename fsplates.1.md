@@ -1,23 +1,25 @@
 fsplates(1) -- easy file system templates
-=====================================
+=========================================
 
-## SYNOPSIS
+## Synopsis
 
-`fsplates` [-fhV] <template> [destination=$PWD]
+`fsplates [-fhV] <template> [destination=$PWD]`
 
-## OPTIONS
+## Options
 
-    `-f, --force`    write over any existing files
-    `-h, --help`     show this help message
-    `-V, --version`  print version number
+    -f, --force    write over any existing files
+    -h, --help     show this help message
+    -V, --version  print version number
 
-## EXAMPLES
+## Examples
 
 simple one file
-  $ fsplate Makefile
+
+`$ fsplate Makefile`
 
 target a sub-directory
-  $ fsplate component myproject
+
+`$ fsplate component myproject`
 
 ## About
 
