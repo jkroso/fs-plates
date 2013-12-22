@@ -36,6 +36,33 @@ substitute(){
   echo "$str"
 }
 
+copyFile(){
+  mkdir -p "$(dirname $2)"
+  if [[ -e "$2" && ! $force ]]; then
+    read -p "'${2/$HOME/~}' exists. (y=overwrite, n=skip, r=rename): " -n 1
+    [[ "$REPLY" ]] && echo >&2
+    case $REPLY in
+      y|Y) continue ;;
+      n|N)
+        echo "skipping $2" >&2
+        return 0
+        ;;
+      r|R)
+        read -p "Enter alternative name for '$(basename $2)': "
+        [[ "$REPLY" ]] && echo >&2
+        copyFile "$1" "$(dirname $2)/${REPLY:-$(basename $2)}"
+        return $?
+        ;;
+      *)
+        echo "Try again" >&2
+        copyFile "$1" "$2"
+        return $?
+        ;;
+    esac
+  fi
+  substitute < "$1" > "$2"
+}
+
 for arg in $@; do
   case $arg in
     -h|--help)
@@ -68,8 +95,7 @@ for line in $(egrep -o ".+: .+" < "$HOME/.fsplates/.config"); do
 done
 IFS="$ifs"
 
-templates_dir="$(realpath $(dirname $(dirname $0))/templates)"
-template="$(realpath -es ${templates_dir}/$1)"
+template="$(realpath -es ${HOME}/.fsplates/$1)"
 destination="$(realpath ${2:-$PWD})"
 
 if [[ -d "$template" ]]; then
@@ -77,33 +103,6 @@ if [[ -d "$template" ]]; then
 else
   base="$(dirname $template)"
 fi
-
-copyFile(){
-  mkdir -p "$(dirname $2)"
-  if [[ -e "$2" && ! $force ]]; then
-    read -p "'${2/$HOME/~}' exists. (y=overwrite, n=skip, r=rename): " -n 1
-    [[ "$REPLY" ]] && echo >&2
-    case $REPLY in
-      y|Y) continue ;;
-      n|N)
-        echo "skipping $2" >&2
-        return 0
-        ;;
-      r|R)
-        read -p "Enter alternative name for '$(basename $2)': "
-        [[ "$REPLY" ]] && echo >&2
-        copyFile "$1" "$(dirname $2)/${REPLY:-$(basename $2)}"
-        return $?
-        ;;
-      *)
-        echo "Try again" >&2
-        copyFile "$1" "$2"
-        return $?
-        ;;
-    esac
-  fi
-  substitute < "$1" > "$2"
-}
 
 for file in $(find -L $template -type f); do
   name="$destination${file#$base}"
