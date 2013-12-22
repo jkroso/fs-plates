@@ -13,6 +13,12 @@ curl -L https://github.com/jkroso/fs-plates/tarball/master \
 make install
 ```
 
+Alternatively you can use npm
+
+```sh
+npm install -g fs-plates
+```
+
 ## Usage
 
 see the [man page](fsplates.1.md)
