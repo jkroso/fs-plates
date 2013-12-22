@@ -17,9 +17,13 @@ simple one file
 
 `$ fsplate Makefile`
 
-target a sub-directory
+use a file that is within a template
 
-`$ fsplate component myproject`
+`$ fsplate component/Makefile`
+
+control target directory
+
+`$ fsplate component ./target`
 
 ## About
 

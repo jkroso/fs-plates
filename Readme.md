@@ -6,14 +6,14 @@
 ## Installation
 
 ```sh
-mkdir /tmp/fs-plates && cd /tmp/fs-plates
+(mkdir -p /tmp/fs-plates && cd /tmp/fs-plates && \
 curl -L https://github.com/jkroso/fs-plates/tarball/master \
   | gzip -cd \
-  | tar -x --strip 1
-make install
+  | tar -x --strip 1 && \
+make install)
 ```
 
-Alternatively you can use npm
+Alternatively you _can_ use npm
 
 ```sh
 npm install -g fs-plates
