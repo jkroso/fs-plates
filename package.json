@@ -1,6 +1,6 @@
 {
   "name": "fsplates",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a cli tool for rendering project boilerplate",
   "preferGlobal": true,
   "dependencies": {},
