@@ -20,7 +20,3 @@ var {{project_name}} = require('{{project_name}}')
 ## API
 
 ### {{project_name}}()
-
-## Running the tests
-
-Just run `make` and navigate your browser to the test directory
