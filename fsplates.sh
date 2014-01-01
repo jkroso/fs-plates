@@ -39,12 +39,14 @@ substitute(){
 copyFile(){
   mkdir -p "$(dirname $2)"
   if [[ -e "$2" && ! $force ]]; then
-    read -p "'${2/$HOME/~}' exists. (y=overwrite, n=skip, r=rename): " -n 1
+    read -p "${2/$HOME/~} exists. (y=overwrite, n=skip, r=rename): " -n 1
     [[ "$REPLY" ]] && echo >&2
     case $REPLY in
-      y|Y) continue ;;
+      y|Y)
+        echo "overwriting ${2/$HOME/~}"
+        ;;
       n|N)
-        echo "skipping $2" >&2
+        echo "skipping ${2/$HOME/~}" >&2
         return 0
         ;;
       r|R)
