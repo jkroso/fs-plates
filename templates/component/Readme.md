@@ -5,7 +5,7 @@
 
 ## Installation
 
-With your favourite package manager:
+With your favorite package manager:
 
 - [packin](//github.com/jkroso/packin): `packin add {{username}}/{{project_name}}`
 - [component](//github.com/component/component#installing-packages): `component install {{username}}/{{project_name}}`
