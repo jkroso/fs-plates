@@ -1,13 +1,10 @@
-REPORTER=spec
 
 test: node_modules
-	@node_modules/mocha/bin/_mocha \
-		--bail \
-		--reporter $(REPORTER)
+	@node_modules/hydro/bin/hydro test/*.test.js \
+		--setup test/hydro.conf.js \
+		--formatter hydro-dot
 
 node_modules: package.json
-	@npm install
-	@npm dedupe
-	@touch node_modules
+	@packin install -m $< -f $@
 
 .PHONY: test
