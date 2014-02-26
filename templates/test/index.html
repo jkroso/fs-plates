@@ -1,20 +1,19 @@
 
 <title>{{project_name}} tests</title>
-<link rel="stylesheet" href="../node_modules/mocha/mocha.css">
+<link rel="stylesheet" href="../node_modules/hydro-html/index.css">
 
-<div id="mocha"></div>
+<div id="hydro"></div>
 
 <script>
-	var mocha = require('mocha')
+  var Hydro = require('hydro')
+  var hydro = new Hydro
+  require('./hydro.conf')(hydro)
+  hydro.set({
+    formatter: require('hydro-html')
+  })
+  hydro.setup()
 
-	mocha.setup({
-		reporter: 'html',
-		timeout: 200,
-		bail: true,
-		ui: 'bdd'
-	})
+  require('./{{project_name}}.test')
 
-	require('./{{project_name}}.test')
-
-	mocha.run()
+  hydro.run()
 </script>
