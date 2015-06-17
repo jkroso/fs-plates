@@ -5,17 +5,15 @@
   "keywords": [{{keywords}}],
   "dependencies": {},
   "devDependencies": {
+    "assert": "jkroso/assert",
     "serve": "jkroso/serve",
-    "chai-spies": "*",
-    "hydro-chai": "*",
+    "hydro-html": "*",
     "hydro-bdd": "*",
     "hydro-dot": "*",
     "hydro": "*",
-    "jsmd": "*",
-    "chai": "*"
+    "jsmd": "*"
   },
   "repository": "git://github.com/{{username}}/{{project_name}}.git",
-  "bugs": "https://github.com/{{username}}/{{project_name}}/issues",
   "author": "{{first_name}} {{last_name}}",
   "files": ["index.js"],
   "license": "MIT"
