@@ -1,16 +1,15 @@
-
 # {{project_name}}
 
-  {{project_description}}
+{{project_description}}
 
 ## Installation
 
-With [packin](//github.com/jkroso/packin): `packin add {{username}}/{{project_name}}`
+`npm install {{username}}/{{project_name}}`
 
 then in your app:
 
 ```js
-var {{project_name}} = require('{{project_name}}')
+import {{project_name}} from '{{project_name}}'
 ```
 
 ## API

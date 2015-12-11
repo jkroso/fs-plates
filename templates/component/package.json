@@ -3,22 +3,15 @@
   "version": "0.0.0",
   "description": "{{project_description}}",
   "keywords": [{{keywords}}],
-  "dependencies": {
-    "babelify": "*"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "assert": "jkroso/assert",
     "serve": "jkroso/serve",
     "hydro-html": "*",
     "hydro-bdd": "*",
     "hydro-dot": "*",
-    "hydro": "*",
-    "jsmd": "*"
+    "hydro": "*"
   },
-  "browserify": {
-    "transform": [["babelify", {"jsxPragma": "JSX","stage":0}]]
-  },
-  "transpile": [["*.js", "!sourcegraph/babel->js", {"jsxPragma": "JSX", "stage": 0}]],
+  "transpile": [["*.js", "!sourcegraph/babel->js", {"stage": 0}]],
   "repository": "git://github.com/{{username}}/{{project_name}}.git",
   "author": "{{first_name}} {{last_name}}",
   "files": ["index.js"],

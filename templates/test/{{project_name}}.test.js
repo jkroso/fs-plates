@@ -1,6 +1,6 @@
+import {{project_name}} from '..'
+import assert from 'assert'
 
-var {{project_name}} = require('..')
-
-it('should ', function(){
+it('should ', () => {
 
 })
